@@ -184,6 +184,25 @@
             }
          ]
       },
+      "docker-build" : {
+         "jobs" : [
+            "build"
+         ],
+         "triggers" : [
+            {
+               "schedule" : {
+                  "cron" : "42 3 * * *",
+                  "filters" : {
+                     "branches" : {
+                        "only" : [
+                           "master"
+                        ]
+                     }
+                  }
+               }
+            }
+         ]
+      },
       "version" : 2
    }
 }
