@@ -36,7 +36,17 @@
             },
             {
                "run" : {
+                  "command" : "docker build -t quay.io/wakaba/base:sid sid"
+               }
+            },
+            {
+               "run" : {
                   "command" : "docker run -it quay.io/wakaba/base:stable true"
+               }
+            },
+            {
+               "run" : {
+                  "command" : "docker run -it quay.io/wakaba/base:sid true"
                }
             },
             {
@@ -57,6 +67,11 @@
             {
                "deploy" : {
                   "command" : "if [ \u0022${CIRCLE_BRANCH}\u0022 == 'master' ]; then\u000Atrue\u000Adocker push quay.io/wakaba/base:stable && curl -sSLf $BWALL_URL -X POST\u000Afi"
+               }
+            },
+            {
+               "deploy" : {
+                  "command" : "if [ \u0022${CIRCLE_BRANCH}\u0022 == 'master' ]; then\u000Atrue\u000Adocker push quay.io/wakaba/base:sid && curl -sSLf $BWALL_URL -X POST\u000Afi"
                }
             }
          ]
@@ -123,9 +138,31 @@
    },
    "version" : 2,
    "workflows" : {
+      "autobuild" : {
+         "jobs" : [
+            "build"
+         ],
+         "triggers" : [
+            {
+               "schedule" : {
+                  "cron" : "8 9 * * *",
+                  "filters" : {
+                     "branches" : {
+                        "only" : [
+                           "master"
+                        ]
+                     }
+                  }
+               }
+            }
+         ]
+      },
       "build" : {
          "jobs" : [
-            "build",
+            {
+               "build" : {
+               }
+            },
             {
                "deploy_nightly" : {
                   "context" : [
@@ -169,26 +206,7 @@
          "triggers" : [
             {
                "schedule" : {
-                  "cron" : "42 18 * * *",
-                  "filters" : {
-                     "branches" : {
-                        "only" : [
-                           "master"
-                        ]
-                     }
-                  }
-               }
-            }
-         ]
-      },
-      "docker-build" : {
-         "jobs" : [
-            "build"
-         ],
-         "triggers" : [
-            {
-               "schedule" : {
-                  "cron" : "42 3 * * *",
+                  "cron" : "8 21 * * *",
                   "filters" : {
                      "branches" : {
                         "only" : [
