@@ -1,16 +1,21 @@
 {
   "circleci": {
-    "docker-build": {"name":"quay.io/wakaba/base:stable", "path":"stable"},
+    "docker-build": [
+      {"name":"quay.io/wakaba/base:stable", "path":"stable"},
+      {"name":"quay.io/wakaba/base:sid", "path":"sid"}
+    ],
     "build": [
       "docker run -d -it debian bash",
       "ip route | awk '/docker0/ { print $NF }' > docker0-ip.txt; cat docker0-ip.txt"
     ],
     "tests": [
       "docker run -it quay.io/wakaba/base:stable true",
+      "docker run -it quay.io/wakaba/base:sid true",
       
       "true"
     ],
     "merger": true,
-    "gaa": true
+    "gaa": true,
+    "autobuild": true
   }
 }
