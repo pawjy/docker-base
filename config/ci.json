@@ -4,10 +4,7 @@
       {"name":"quay.io/wakaba/base:stable", "path":"stable"},
       {"name":"quay.io/wakaba/base:sid", "path":"sid"}
     ],
-    "build": [
-      "docker run -d -it debian bash",
-      "ip route | awk '/docker0/ { print $NF }' > docker0-ip.txt; cat docker0-ip.txt"
-    ],
+    "build_generated_files": [],
     "tests": [
       "docker run -it quay.io/wakaba/base:stable true",
       "docker run -it quay.io/wakaba/base:sid true",
