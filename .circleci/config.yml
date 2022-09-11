@@ -66,12 +66,22 @@
             },
             {
                "deploy" : {
-                  "command" : "if [ \u0022${CIRCLE_BRANCH}\u0022 == 'master' ]; then\u000Atrue\u000Adocker push quay.io/wakaba/base:stable && curl -sSLf $BWALL_URL -X POST\u000Afi"
+                  "command" : "if [ \u0022${CIRCLE_BRANCH}\u0022 == 'master' ]; then\u000Atrue\u000Adocker push quay.io/wakaba/base:stable\u000Afi"
                }
             },
             {
                "deploy" : {
-                  "command" : "if [ \u0022${CIRCLE_BRANCH}\u0022 == 'master' ]; then\u000Atrue\u000Adocker push quay.io/wakaba/base:sid && curl -sSLf $BWALL_URL -X POST\u000Afi"
+                  "command" : "if [ \u0022${CIRCLE_BRANCH}\u0022 == 'master' ]; then\u000Atrue\u000Acurl -sSf $BWALLER_URL | BWALL_GROUP=docker BWALL_NAME=quay.io/wakaba/base:stable bash\u000Afi"
+               }
+            },
+            {
+               "deploy" : {
+                  "command" : "if [ \u0022${CIRCLE_BRANCH}\u0022 == 'master' ]; then\u000Atrue\u000Adocker push quay.io/wakaba/base:sid\u000Afi"
+               }
+            },
+            {
+               "deploy" : {
+                  "command" : "if [ \u0022${CIRCLE_BRANCH}\u0022 == 'master' ]; then\u000Atrue\u000Acurl -sSf $BWALLER_URL | BWALL_GROUP=docker BWALL_NAME=quay.io/wakaba/base:sid bash\u000Afi"
                }
             }
          ]
@@ -84,7 +94,7 @@
             "checkout",
             {
                "deploy" : {
-                  "command" : "git rev-parse HEAD > head.txt\u000Acurl -f -s -S --request POST --header \u0022Authorization:token $GITHUB_ACCESS_TOKEN\u0022 --header \u0022Content-Type:application/json\u0022 --data-binary \u0022{\u005C\u0022base\u005C\u0022:\u005C\u0022master\u005C\u0022,\u005C\u0022head\u005C\u0022:\u005C\u0022`cat head.txt`\u005C\u0022,\u005C\u0022commit_message\u005C\u0022:\u005C\u0022auto-merge $CIRCLE_BRANCH into master\u005C\u0022}\u0022 \u0022https://api.github.com/repos/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/merges\u0022 && curl -f https://$BWALL_TOKEN:@$BWALL_HOST/ping/merger.$CIRCLE_BRANCH/$CIRCLE_PROJECT_USERNAME%2F$CIRCLE_PROJECT_REPONAME -X POST"
+                  "command" : "git rev-parse HEAD > head.txt\u000Acurl -f -s -S --request POST --header \u0022Authorization:token $GITHUB_ACCESS_TOKEN\u0022 --header \u0022Content-Type:application/json\u0022 --data-binary \u0022{\u005C\u0022base\u005C\u0022:\u005C\u0022master\u005C\u0022,\u005C\u0022head\u005C\u0022:\u005C\u0022`cat head.txt`\u005C\u0022,\u005C\u0022commit_message\u005C\u0022:\u005C\u0022auto-merge $CIRCLE_BRANCH into master\u005C\u0022}\u0022 \u0022https://api.github.com/repos/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/merges\u0022\u000Acurl -sSf $BWALLER_URL | BWALL_GROUP=merger.$CIRCLE_BRANCH BWALL_NAME=$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME bash"
                }
             }
          ]
@@ -97,7 +107,7 @@
             "checkout",
             {
                "deploy" : {
-                  "command" : "git rev-parse HEAD > head.txt\u000Acurl -f -s -S --request POST --header \u0022Authorization:token $GITHUB_ACCESS_TOKEN\u0022 --header \u0022Content-Type:application/json\u0022 --data-binary \u0022{\u005C\u0022base\u005C\u0022:\u005C\u0022master\u005C\u0022,\u005C\u0022head\u005C\u0022:\u005C\u0022`cat head.txt`\u005C\u0022,\u005C\u0022commit_message\u005C\u0022:\u005C\u0022auto-merge $CIRCLE_BRANCH into master\u005C\u0022}\u0022 \u0022https://api.github.com/repos/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/merges\u0022 && curl -f https://$BWALL_TOKEN:@$BWALL_HOST/ping/merger.$CIRCLE_BRANCH/$CIRCLE_PROJECT_USERNAME%2F$CIRCLE_PROJECT_REPONAME -X POST"
+                  "command" : "git rev-parse HEAD > head.txt\u000Acurl -f -s -S --request POST --header \u0022Authorization:token $GITHUB_ACCESS_TOKEN\u0022 --header \u0022Content-Type:application/json\u0022 --data-binary \u0022{\u005C\u0022base\u005C\u0022:\u005C\u0022master\u005C\u0022,\u005C\u0022head\u005C\u0022:\u005C\u0022`cat head.txt`\u005C\u0022,\u005C\u0022commit_message\u005C\u0022:\u005C\u0022auto-merge $CIRCLE_BRANCH into master\u005C\u0022}\u0022 \u0022https://api.github.com/repos/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/merges\u0022\u000Acurl -sSf $BWALLER_URL | BWALL_GROUP=merger.$CIRCLE_BRANCH BWALL_NAME=$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME bash"
                }
             }
          ]
