@@ -242,6 +242,16 @@
             },
             {
                "run" : {
+                  "command" : "make test-image DOCKER_IMAGE=quay.io/wakaba/base:stable"
+               }
+            },
+            {
+               "run" : {
+                  "command" : "make test-image DOCKER_IMAGE=quay.io/wakaba/base:sid"
+               }
+            },
+            {
+               "run" : {
                   "command" : "true"
                }
             },
@@ -280,7 +290,7 @@
          "triggers" : [
             {
                "schedule" : {
-                  "cron" : "14 7 * * *",
+                  "cron" : "21 9 * * *",
                   "filters" : {
                      "branches" : {
                         "only" : [
@@ -368,7 +378,7 @@
          "triggers" : [
             {
                "schedule" : {
-                  "cron" : "14 19 * * *",
+                  "cron" : "21 21 * * *",
                   "filters" : {
                      "branches" : {
                         "only" : [
