@@ -1,4 +1,5 @@
-FROM debian:stable-slim
+FROM debian:bullseye-slim
+#FROM debian:stable-slim
 
 CMD ["bash"]
 
