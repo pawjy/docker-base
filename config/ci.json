@@ -5,8 +5,8 @@
       {"docker_build":"quay.io/wakaba/base:sid", "path":"sid"}
     ],
     "tests": [
-      "docker run -it quay.io/wakaba/base:stable true",
-      "docker run -it quay.io/wakaba/base:sid true",
+      "docker run -i quay.io/wakaba/base:stable true",
+      "docker run -i quay.io/wakaba/base:sid true",
       "make test-image DOCKER_IMAGE=quay.io/wakaba/base:stable",
       "make test-image DOCKER_IMAGE=quay.io/wakaba/base:sid",
       

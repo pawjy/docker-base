@@ -104,10 +104,10 @@
                "run" : "docker build -t quay\u005C.io\u005C/wakaba\u005C/base\u005C:sid sid"
             },
             {
-               "run" : "docker run -it quay.io/wakaba/base:stable true"
+               "run" : "docker run -i quay.io/wakaba/base:stable true"
             },
             {
-               "run" : "docker run -it quay.io/wakaba/base:sid true"
+               "run" : "docker run -i quay.io/wakaba/base:sid true"
             },
             {
                "run" : "make test-image DOCKER_IMAGE=quay.io/wakaba/base:stable"
@@ -171,7 +171,7 @@
       },
       "schedule" : [
          {
-            "cron" : "22 2 * * *"
+            "cron" : "20 2 * * *"
          }
       ]
    }
