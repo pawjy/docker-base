@@ -1,15 +1,17 @@
 {
-  "circleci": {
-    "docker-build": [
-      {"name":"quay.io/wakaba/base:stable", "path":"stable"},
-      {"name":"quay.io/wakaba/base:sid", "path":"sid"}
+  "github": {
+    "build": [
+      {"docker_build":"quay.io/wakaba/base:stable", "path":"stable"},
+      {"docker_build":"quay.io/wakaba/base:sid", "path":"sid"}
     ],
-    "build_generated_files": [],
     "tests": [
       "docker run -it quay.io/wakaba/base:stable true",
       "docker run -it quay.io/wakaba/base:sid true",
       "make test-image DOCKER_IMAGE=quay.io/wakaba/base:stable",
       "make test-image DOCKER_IMAGE=quay.io/wakaba/base:sid",
+      
+      {"docker_push":"quay.io/wakaba/base:stable"},
+      {"docker_push":"quay.io/wakaba/base:sid"},
       
       "true"
     ],
