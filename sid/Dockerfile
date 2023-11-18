@@ -1,5 +1,5 @@
 #FROM debian:sid-slim
-FROM debian:sid
+FROM debian:12-slim
 
 CMD ["bash"]
 
