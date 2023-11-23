@@ -157,6 +157,7 @@
                "run" : "true"
             },
             {
+               "if" : "${{ always () }}",
                "uses" : "actions/upload-artifact@v3",
                "with" : {
                   "path" : "/tmp/circle-artifacts/test"
