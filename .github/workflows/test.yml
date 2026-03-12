@@ -98,10 +98,10 @@
                "run" : "mkdir -p $CIRCLE_ARTIFACTS"
             },
             {
-               "run" : "docker build -t quay\u005C.io\u005C/wakaba\u005C/base\u005C:stable stable"
+               "run" : "docker build --cache-from quay\u005C.io\u005C/wakaba\u005C/base\u005C:stable -t quay\u005C.io\u005C/wakaba\u005C/base\u005C:stable stable"
             },
             {
-               "run" : "docker build -t quay\u005C.io\u005C/wakaba\u005C/base\u005C:sid sid"
+               "run" : "docker build --cache-from quay\u005C.io\u005C/wakaba\u005C/base\u005C:sid -t quay\u005C.io\u005C/wakaba\u005C/base\u005C:sid sid"
             },
             {
                "run" : "docker run -i quay.io/wakaba/base:stable true"
